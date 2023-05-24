@@ -29,6 +29,8 @@ enum custom_keycodes {
 #define CT_TAB C(KC_TAB)
 #define CS_TAB C(S(KC_TAB))
 
+#define CTL_C C(KC_C)
+
 
 // Ctrl+Shift keys
 #define CS_M LCTL(S(KC_M))
@@ -68,7 +70,6 @@ enum custom_keycodes {
 #define CT_1 LCTL(KC_1)
 #define CT_2 LCTL(KC_2)
 #define CT_J LCTL(KC_J)
-#define CT_G LCTL(KC_G)
 #define CT_F5 LCTL(KC_F5)
 #define CT_BSLS LCTL(KC_BSLS)
 
@@ -224,7 +225,6 @@ enum Layers {
 };
 
 
-
 #define TG_RED TG(L_RED)
 #define TG_GREN TG(L_GREN)
 #define TG_VIOL TG(L_VIOL)
@@ -369,8 +369,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             // LEFT HALF
             TG_RED,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,
             CT_G,    WN_C_1,  WN_C_2,  WN_C_3,  WN_C_4,  WN_C_5,  WN_C_6,
-            _______, _______, _______, _______,   _______, _______,    _______,
-            _______, CT_LEFT, CT_DOWN, CT_UP,   CT_RGHT, CT_F,
+            _______, _______, _______, _______, _______, _______,  CTL_C,
+            _______, _______, _______, CS_G,  CT_G, CT_F,
             _______, _______, _______, _______, _______,
             _______, // LEFT RED THUMB KEY
             _______, _______, _______, // LEFT THUMB KEYS
@@ -632,20 +632,20 @@ const ComboWithKeycode combos[] PROGMEM = {
 
     // total combos upper = 57
     //right outer column
-    CHORD(AG_SCLN, EC_R1), // ;
-    CHORD(AG_COLN, EC_S_R1), // :
-    CHORD(AG_MINS, EC_R2), // -
-    CHORD(EN_TILD, EC_S_R2), // ~
+    CHORD(AG_MINS, EC_R1), // -
+    CHORD(EN_TILD, EC_S_R1), // ~
+    CHORD(AG_SCLN, EC_R2), // ;
+    CHORD(AG_COLN, EC_S_R2), // :
     CHORD(EN_SLSH, EC_R3), // /
     CHORD(EN_BSLS, EC_S_R3), // backslash
 
     //left outer column
-    CHORD(KC_TAB, EC_L1), // tab
-    CHORD(AG_UNDS, EC_L2), // _
+    CHORD(AG_UNDS, EC_L1), // _
+    CHORD(KC_TAB, EC_L2), // tab
     CHORD(AG_PLUS, EC_S_L2), // +
     CHORD(AG_EQL, EC_L2, EC_L3), // =
-    CHORD(EN_HASH, EC_L3), // #
-    CHORD(EN_DLR, EC_S_L3), // $
+    CHORD(EN_HASH, EC_S_L3), // #
+    CHORD(EN_DLR, EC_L3), // $
 
 
 

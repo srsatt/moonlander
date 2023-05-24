@@ -18,6 +18,8 @@ enum custom_hotkeys_keycodes {
   CS_T,
   CS_W,
   CO_L,
+  CT_G,
+  CS_G,
   CS_K,
   WN_L, // lock computer
   CT_PGUP, // prev tab
@@ -176,6 +178,13 @@ bool process_my_hotkeys(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
     }
+    case CS_G: {
+      if (record->event.pressed) {
+        WITH(CTRL_OR_COMMAND, { WITH(SHIFT, { PRESS(KC_G); }); });
+      }
+      return false;
+    }
+
     case CO_L: {
       if (record->event.pressed) {
         WITH(CTRL_OR_COMMAND, { WITH(KC_LALT, { PRESS(KC_L); }); });
@@ -374,6 +383,7 @@ bool process_my_hotkeys(uint16_t keycode, keyrecord_t *record) {
     CASE_CTRL_OR_COMMAND(CT_W, KC_W)
     CASE_CTRL_OR_COMMAND(CT_S, KC_S)
     CASE_CTRL_OR_COMMAND(CT_F, KC_F)
+    CASE_CTRL_OR_COMMAND(CT_G, KC_G)
     CASE_CTRL_OR_COMMAND(CT_A, KC_A)
     CASE_CTRL_OR_COMMAND(CT_X, KC_X)
     CASE_CTRL_OR_COMMAND(CT_C, KC_C)
