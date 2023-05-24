@@ -16,6 +16,8 @@ enum custom_hotkeys_keycodes {
   CT_A_X,
   AR_L5,
   CS_T,
+  CS_W,
+  CO_L,
   CS_K,
   WN_L, // lock computer
   CT_PGUP, // prev tab
@@ -46,7 +48,6 @@ enum custom_hotkeys_keycodes {
   CT_LEFT,
   CT_RGHT,
   CT_BSPC,
-
   // for macos: ctrl -> cmd
   CT_ENT,
   CT_T,
@@ -169,6 +170,19 @@ bool process_my_hotkeys(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
     }
+    case CS_W: {
+      if (record->event.pressed) {
+        WITH(CTRL_OR_COMMAND, { WITH(SHIFT, { PRESS(KC_W); }); });
+      }
+      return false;
+    }
+    case CO_L: {
+      if (record->event.pressed) {
+        WITH(CTRL_OR_COMMAND, { WITH(KC_LALT, { PRESS(KC_L); }); });
+      }
+      return false;
+    }
+
     case CS_K: {
       if (record->event.pressed) {
         WITH(CTRL_OR_COMMAND, { WITH(SHIFT, { PRESS(KC_K); }); });

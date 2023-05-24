@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/arbitrary_keycode" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/combo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lang_shift" vcs="Git" />
+  </component>
+</project>

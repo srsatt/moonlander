@@ -7,6 +7,9 @@
 enum custom_lang_keycodes {
   CUSTOM_LANG_START = CUSTOM_SAFE_RANGE,
 
+  EQ_JS, // ===
+  NEQ_JS, // !==
+  ARR_F_JS, // ()=>{}◀️
   EN_LTEQ, // <=
   EN_GTEQ, // >=
   EN_ARR1, // ->
@@ -150,6 +153,35 @@ bool process_my_lang_keys(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         lang_shift_tap_key(AG_LPRN);
         lang_shift_tap_key(AG_RPRN);
+      }
+      return false;
+      break;
+
+    case EQ_JS:
+      if(record->event.pressed){
+        lang_shift_tap_key(AG_EQL);
+        lang_shift_tap_key(AG_EQL);
+        lang_shift_tap_key(AG_EQL);
+      }
+      return false;
+      break;
+    case NEQ_JS:
+      if(record->event.pressed){
+        lang_shift_tap_key(AG_EXCL);
+        lang_shift_tap_key(AG_EQL);
+        lang_shift_tap_key(AG_EQL);
+      }
+      return false;
+      break;
+    case ARR_F_JS:
+      if(record->event.pressed){
+        lang_shift_tap_key(AG_LPRN);
+        lang_shift_tap_key(AG_RPRN);
+        lang_shift_tap_key(AG_EQL);
+        lang_shift_tap_key(EN_GT);
+        lang_shift_tap_key(EN_LCBR);
+        lang_shift_tap_key(EN_RCBR);
+        register_code(KC_LEFT); unregister_code(KC_LEFT);
       }
       return false;
       break;

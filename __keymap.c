@@ -1,7 +1,6 @@
 #include QMK_KEYBOARD_H
 #include <quantum/pointing_device.h>
 #include "version.h"
-#include "layout.h"
 
 #include "arbitrary_keycode/include.h"
 
@@ -23,12 +22,34 @@ enum custom_keycodes {
 #define CUSTOM_SAFE_RANGE NEW_NEW_SAFE_RANGE
 };
 
+#define MY_layout( \
+    k00, k01, k02, k03, k04, k05, k06, \
+    k10, k11, k12, k13, k14, k15, k16, \
+    k20, k21, k22, k23, k24, k25, k26, \
+    k30, k31, k32, k33, k34, k35,      \
+    k40, k41, k42, k43, k44,           \
+    k53, \
+    k50, k51, k52, \
+    \
+    k60, k61, k62, k63, k64, k65, k66, \
+    k70, k71, k72, k73, k74, k75, k76, \
+    k80, k81, k82, k83, k84, k85, k86, \
+    k91, k92, k93, k94, k95, k96, \
+    ka2, ka3, ka4, ka5, ka6, \
+    kb3,\
+    kb4, kb5, kb6 \
+) \
+LAYOUT_moonlander( \
+    k00, k01, k02, k03, k04, k05, k06,   k60, k61, k62, k63, k64, k65, k66, \
+    k10, k11, k12, k13, k14, k15, k16,   k70, k71, k72, k73, k74, k75, k76, \
+    k20, k21, k22, k23, k24, k25, k26,   k80, k81, k82, k83, k84, k85, k86, \
+    k30, k31, k32, k33, k34, k35,             k91, k92, k93, k94, k95, k96, \
+    k40, k41, k42, k43, k44,      k53,   kb3,      ka2, ka3, ka4, ka5, ka6, \
+                        k50, k51, k52,   kb4, kb5, kb6 \
+)
 
 // Shift keys
 #define SH_TAB S(KC_TAB)
-#define CT_TAB C(KC_TAB)
-#define CS_TAB C(S(KC_TAB))
-
 
 // Ctrl+Shift keys
 #define CS_M LCTL(S(KC_M))
@@ -37,17 +58,6 @@ enum custom_keycodes {
 // Alt keys
 #define AL_UP LALT(KC_UP)
 #define AL_PSCR LALT(KC_PSCR)
-
-
-// prog select for Raycast
-#define WN_C_1 LGUI(LALT(KC_1))
-#define WN_C_2 LGUI(LALT(KC_2))
-#define WN_C_3 LGUI(LALT(KC_3))
-#define WN_C_4 LGUI(LALT(KC_4))
-#define WN_C_5 LGUI(LALT(KC_5))
-#define WN_C_6 LGUI(LALT(KC_6))
-
-
 
 // Gui keys
 #define WN_1 LGUI(KC_1)
@@ -72,110 +82,50 @@ enum custom_keycodes {
 #define CT_F5 LCTL(KC_F5)
 #define CT_BSLS LCTL(KC_BSLS)
 
-
-
 #define RGB_LYR TOGGLE_LAYER_COLOR
 
 enum Combos {
     // Chords
+    // Left Index
+    CMB_CTC = CMB_000,
+    CMB_CTV,
+    // Left Thumb
+    CMB_SFT,
+    CMB_BSP,
+    CMB_ENT,
+    CMB_CTL,
+    // Left Left Thumb
+    CMB_LYV,
+    CMB_LYG,
+    // Right Thumb
+    CMB_RED,
+    CMB_LAN,
+    CMB_DOT,
+    CMB_SPC,
+    CMB_ALT,
 
-    // thumb cluster edge to middle, U-upper red
-    TC_L1 = CMB_000,
-    TC_L2,
-    TC_L3,
-    TC_LU,
+    // Shifted index keys
+    CMB_CAC,
+    CMB_CAV,
 
-    TC_R1,
-    TC_R2,
-    TC_R3,
-    TC_RU,
+    // Russian index keys on letters
+    CMS_R,
+    CMS_SH,
+    CMS_S_R,
+    CMS_SSH,
 
-
-    //russian combos
-    // Х+Ж = Э
-    // Б+Ь = Ъ
-    RU_CMB_H,
-    RU_CMB_ZH,
-    RU_CMB_S_H,
-    RU_CMB_S_ZH,
-
-    RU_CMB_B,
-    RU_CMB_S_B,
-    RU_CMB_SF,
-    RU_CMB_S_SF,
-
-
-
-    // Left number-row left to right
-    UR_L1,
-    UR_L2,
-    UR_L3,
-    UR_L4,
-    UR_L5,
-    UR_L6,
-
-    // Right number-row right to left
-    UR_R1,
-    UR_R2,
-    UR_R3,
-    UR_R4,
-    UR_R5,
-    UR_R6,
-
-    // bottom control row
-    BR_R1,
-    BR_R2,
-    BR_R3,
-    BR_R4,
-    BR_R5,
-
-    BR_L1,
-    BR_L2,
-    BR_L3,
-    BR_L4,
-    BR_L5,
-
-
-    // middle hotkeys column
-    MC_L1,
-    MC_L2,
-    MC_L3,
-
-    MC_R1,
-    MC_R2,
-    MC_R3,
-
-    // middle hotkeys columns with SHIFT
-    MC_LS1,
-    MC_LS2,
-    MC_LS3,
-
-    MC_RS1,
-    MC_RS2,
-    MC_RS3,
-
-
-
-    // Edge Controls Line
-    EC_L1,
-    EC_L2,
-    EC_L3,
-    EC_S_L1,
-    EC_S_L2,
-    EC_S_L3,
-
-
-    EC_R1,
-    EC_R2,
-    EC_R3,
-    EC_S_R1,
-    EC_S_R2,
-    EC_S_R3,
-
-
-
-
-
+    // Left number-row
+    CMB_PLS,
+    CMB_SCL,
+    CMB_GRV,
+    CMB_EXL,
+    CMB_ASR,
+    // Right number-row
+    CMB_EQL,
+    CMB_CLN,
+    CMB_CMM,
+    CMB_QUE,
+    CMB_SLS,
 
     // Brackets on red layer, order: 1 - (), 2 - [], 3 - {}, 4 - <>
     CMB_LB1,
@@ -192,7 +142,6 @@ enum Combos {
     CMB_RTR,
     CMB_LCR,
     CMB_RCR,
-
 };
 
 #define TT_CTJ TT_000
@@ -222,8 +171,6 @@ enum Layers {
     L_GAME,
     L_NUCL,
 };
-
-
 
 #define TG_RED TG(L_RED)
 #define TG_GREN TG(L_GREN)
@@ -259,54 +206,54 @@ enum Layers {
   /* Left hand */ \
        LU1, LU2, LU3, LU4, LU5, \
        LH1, LH2, LH3, LH4, LH5, \
-       LD1, LD2, LD3, LD4, LD5, /* Right hand */ \
-       RU1, RU2, RU3, RU4, RU5, \
-       RH1, RH2, RH3, RH4, RH5, \
-       RD1, RD2, RD3, RD4, RD5, \
+  LD0, LD1, LD2, LD3, LD4, LD5, /* Right hand */ \
+  RU1, RU2, RU3, RU4, RU5, \
+  RH1, RH2, RH3, RH4, RH5, RH6, \
+  RD1, RD2, RD3, RD4, RD5, RD6, \
   \
   /* ---------------------------- Shift layer ---------------------------- */ /* Left hand */ \
         SLU1, SLU2, SLU3, SLU4, SLU5, \
         SLH1, SLH2, SLH3, SLH4, SLH5, \
-        SLD1, SLD2, SLD3, SLD4, SLD5, /* Right hand */ \
+  SLD0, SLD1, SLD2, SLD3, SLD4, SLD5, /* Right hand */ \
   SRU1, SRU2, SRU3, SRU4, SRU5, \
-  SRH1, SRH2, SRH3, SRH4, SRH5, \
-  SRD1, SRD2, SRD3, SRD4, SRD5  \
-    ) \
+  SRH1, SRH2, SRH3, SRH4, SRH5, SRH6, \
+  SRD1, SRD2, SRD3, SRD4, SRD5, SRD6 \
+) \
   /*-------------------------------------------------------------------------*/ \
   [L_DEFAULT] = MY_layout(/* LEFT HALF */ \
-    UR_L1,   UR_L2,   UR_L3,   UR_L4,   UR_L5,   UR_L6,   MC_L1, \
-    EC_L1,   LU1,     LU2,     LU3,     LU4,     LU5,     MC_L2, \
-    EC_L2,   LH1,     LH2,     LH3,     LH4,     LH5,     MC_L3, \
-    EC_L3,   LD1,     LD2,     LD3,     LD4,     LD5, \
-    BR_L1,   BR_L2,   BR_L3,   BR_L4,   BR_L5, \
-    TC_LU, /* LEFT RED THUMB KEY */ \
-    TC_L1,   TC_L2,   TC_L3, /* LEFT THUMB KEYS */ \
+    KC_ESC,  CMB_PLS, CMB_SCL, CMB_GRV, CMB_EXL, CMB_ASR, EN_AT, \
+    AG_UNDS, LU1,     LU2,     LU3,     LU4,     LU5,     CMB_CTC, \
+    SFT_N_O, LH1,     LH2,     LH3,     LH4,     LH5,     CMB_CTV, \
+    LD0,     LD1,     LD2,     LD3,     LD4,     LD5, \
+    MU_CTJ,  TT_YELW, CT_SLSH, CMB_LYG, CMB_LYV, \
+    CMB_CTL, /* LEFT RED THUMB KEY */ \
+    CMB_SFT, CMB_BSP, CMB_ENT, /* LEFT THUMB KEYS */ \
     \
     /* RIGHT HALF */ \
-    MC_R1,   UR_R6,   UR_R5,   UR_R4,   UR_R3,   UR_R2,   UR_R1, \
-    MC_R2,   RU1,     RU2,     RU3,     RU4,     RU5,     EC_R1, \
-    MC_R3,   RH1,     RH2,     RH3,     RH4,     RH5,     EC_R2, \
-             RD1,     RD2,     RD3,     RD4,     RD5,     EC_R3, \
-                      BR_R5,   BR_R4,   BR_R3,   BR_R2,   BR_R1, \
-                      TC_RU, /* RIGHT RED THUMB KEY */ \
-                      TC_R3, TC_R2, TC_R1 /* RIGHT THUMB KEYS */ \
+    EN_CIRC, CMB_EQL, CMB_CLN, CMB_CMM, CMB_QUE, CMB_SLS, CT_Z, \
+    CT_S,    RU1,     RU2,     RU3,     RU4,     RU5,     AG_MINS, \
+    CT_D,    RH1,     RH2,     RH3,     RH4,     RH5,     RH6, \
+             RD1,     RD2,     RD3,     RD4,     RD5,     RD6, \
+                      CMB_RED, AG_3DOT, KG_NEXT, TT_GAME, TT_NUCL, \
+                      CMB_ALT, /* RIGHT RED THUMB KEY */ \
+                      CMB_LAN, CMB_DOT, CMB_SPC /* RIGHT THUMB KEYS */ \
   ), \
   \
   /*-------------------------------------------------------------------------*/ \
-  [L_SHIFT] = MY_layout(                                               /* LEFT HALF */ \
-    _______, AG_1,    AG_2,    AG_3,    AG_4,    AG_5,    MC_LS1, /* NUMBERS WITH SHIFT */  \
-    EC_S_L1, SLU1,    SLU2,    SLU3,    SLU4,    SLU5,    MC_LS2, \
-    EC_S_L2, SLH1,    SLH2,    SLH3,    SLH4,    SLH5,    MC_LS3, \
-    EC_S_L3, SLD1,    SLD2,    SLD3,    SLD4,    SLD5, \
+  [L_SHIFT] = MY_layout(/* LEFT HALF */ \
+    _______, _______, _______, _______, _______, AG_CMNT, _______, \
+    _______, SLU1,    SLU2,    SLU3,    SLU4,    SLU5,    CMB_CAC, \
+    _______, SLH1,    SLH2,    SLH3,    SLH4,    SLH5,    CMB_CAV, \
+    SLD0,    SLD1,    SLD2,    SLD3,    SLD4,    SLD5, \
     _______, _______, _______, _______, _______, \
     _______, /* LEFT RED THUMB KEY */ \
     _______, _______, _______, /* LEFT THUMB KEYS */ \
     \
     /* RIGHT HALF */ \
-    MC_RS1,  AG_6,    AG_7,    AG_8,    AG_9,    AG_0,    _______, \
-    MC_RS2,  SRU1,    SRU2,    SRU3,    SRU4,    SRU5,    EC_S_R1, \
-    MC_RS3,  SRH1,    SRH2,    SRH3,    SRH4,    SRH5,    EC_S_R2, \
-             SRD1,    SRD2,    SRD3,    SRD4,    SRD5,    EC_S_R3, \
+    _______, _______, AG2COLN, AG_COMM, _______, AG2SLSH, CT_Y, \
+    _______, SRU1,    SRU2,    SRU3,    SRU4,    SRU5,    _______, \
+    _______, SRH1,    SRH2,    SRH3,    SRH4,    SRH5,    SRH6, \
+             SRD1,    SRD2,    SRD3,    SRD4,    SRD5,    SRD6, \
                       _______, _______, _______, _______, _______, \
                       _______, /* RIGHT RED THUMB KEY */ \
                       _______, _______, _______ /* RIGHT THUMB KEYS */ \
@@ -318,69 +265,70 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         L_EN, L_EN_S,
 
         /* Left hand */
-        EN_Q,    EN_W,    EN_E,    EN_R,    EN_T,
-        EN_A,    EN_S,    EN_D,    EN_F,    EN_G,
-        EN_Z,    EN_X,    EN_C,    EN_V,    EN_B,
+        AC_GRV,  EN_X,    EN_Y,    EN_P,    EN_S_I,
+        EN_A,    EN_O,    EN_E,    EN_U,    EN_I,
+        XXXXXXX, AC_ACT,  EN_Q,    EN_J,    EN_K,    AC_CIRC,
 
         /* Right hand */
-        EN_Y,    EN_U,    EN_I,    EN_O,    EN_P,
-        EN_H,    EN_J,    EN_K,    EN_L,    EN_S,
-        EN_N,    EN_M,    EN_W,    EN_V,    EN_Z,
+        EN_F,    EN_G,    EN_C,    EN_R,    EN_L,
+        EN_D,    EN_H,    EN_T,    EN_N,    EN_S,    XXXXXXX,
+        EN_B,    EN_M,    EN_W,    EN_V,    EN_Z,    AC_TILD,
 
         /* ---------------------------- Shift layer ---------------------------- */
         /* Left hand */
-        EN_S_Q,    EN_S_W,    EN_S_E,    EN_S_R,    EN_S_T,
-        EN_S_A,    EN_S_S,    EN_S_D,    EN_S_F,    EN_S_G,
-        EN_S_Z,    EN_S_X,    EN_S_C,    EN_S_V,    EN_S_B,
+        AC_GRV,  EN_S_X,  EN_S_Y,  EN_S_P,  EN_S_I,
+        EN_S_A,  EN_S_O,  EN_S_E,  EN_S_U,  EN_S_I,
+        _______, AC_ACT,  EN_S_Q,  EN_S_J,  EN_S_K,  AC_CIRC,
 
         /* Right hand */
-        EN_S_Y,    EN_S_U,    EN_S_I,    EN_S_O,    EN_S_P,
-        EN_S_H,    EN_S_J,    EN_S_K,    EN_S_L,    EN_S_S,
-        EN_S_N,    EN_S_M,    EN_S_W,    EN_S_V,    EN_S_Z
+        EN_S_F,  EN_S_G,  EN_S_C,  EN_S_R,  EN_S_L,
+        EN_S_D,  EN_S_H,  EN_S_T,  EN_S_N,  EN_S_S,  _______,
+        EN_S_B,  EN_S_M,  EN_S_W,  EN_S_V,  EN_S_Z,  _______
         )
 
     //---------------------------------------------------------------------------
     LANG_TWO_LAYERS(
         L_RU, L_RU_S,
+
         /* Left hand */
-        RU_J,    RU_TS,   RU_U,    RU_K,    RU_JE,
-        RU_F,    RU_Y,    RU_V,    RU_A,    RU_P,
-        RU_JA,   RU_CH,   RU_S,    RU_M,    RU_I,
+        RU_J,    RU_TS,   RU_U,    RU_JE,   RU_F,
+        RU_K,    RU_M,    RU_V,    RU_A,    RU_P,
+        XXXXXXX, RU_JA,   RU_CH,   RU_S,    RU_I,    RU_Y,
 
         /* Right hand */
-        //  я ч с м и т ь б ю /
-        RU_N,    RU_G,    RU_SH,   RU_SC,   RU_Z,
-        RU_R,    RU_O,    RU_L,    RU_D,    RU_CMB_H,
-        RU_T,    RU_CMB_SF,   RU_CMB_B,    RU_JU,   RU_CMB_ZH,
+        RU_SC,   RU_Z,    RU_T,    RU_N,    RU_G,
+        CMS_R,   RU_O,    RU_L,    RU_D,    RU_ZH,   RU_E,
+        CMS_SH,  RU_SF,   RU_B,    RU_JU,   RU_H,    RU_JO,
 
         /* ---------------------------- Shift layer ---------------------------- */
         /* Left hand */
-        RU_S_J,    RU_S_TS,   RU_S_U,    RU_S_K,    RU_S_JE,
-        RU_S_F,    RU_S_Y,    RU_S_V,    RU_S_A,    RU_S_P,
-        RU_S_JA,   RU_S_CH,   RU_S_S,    RU_S_M,    RU_S_I,
+        RU_S_J,  RU_S_TS, RU_S_U,  RU_S_JE, RU_S_F,
+        RU_S_K,  RU_S_M,  RU_S_V,  RU_S_A,  RU_S_P,
+        _______, RU_S_JA, RU_S_CH, RU_S_S,  RU_S_I,  RU_S_Y,
+
         /* Right hand */
-        RU_S_N,    RU_S_G,    RU_S_SH,   RU_S_SC,   RU_S_Z,
-        RU_S_R,    RU_S_O,    RU_S_L,    RU_S_D,    RU_CMB_S_H,
-        RU_S_T,    RU_CMB_S_SF,   RU_CMB_S_B,    RU_S_JU,   RU_CMB_S_ZH
+        RU_S_SC, RU_S_Z,  RU_S_T,  RU_S_N,  RU_S_G,
+        CMS_S_R, RU_S_O,  RU_S_L,  RU_S_D,  RU_S_ZH, RU_S_E,
+        CMS_SSH, RU_S_SF, RU_S_B,  RU_S_JU, RU_S_H,  RU_S_JO
         )
 
         //---------------------------------------------------------------------------
         [L_RED] = MY_layout(
             // LEFT HALF
-            TG_RED,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,
-            CT_G,    WN_C_1,  WN_C_2,  WN_C_3,  WN_C_4,  WN_C_5,  WN_C_6,
-            _______, _______, _______, _______,   _______, _______,    _______,
+            TG_RED,  _______, _______, _______, _______, _______, _______,
+            CT_G,    MY_HOME, KC_PGDN, KC_PGUP, MY_END,  CT_J,    _______,
+            _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, CS_K,    _______,
             _______, CT_LEFT, CT_DOWN, CT_UP,   CT_RGHT, CT_F,
             _______, _______, _______, _______, _______,
             _______, // LEFT RED THUMB KEY
             _______, _______, _______, // LEFT THUMB KEYS
 
             // RIGHT HALF
-            KC_F7,   KC_F8,    KC_F9,   KC_F10,   KC_F11,  KC_F12,  _______,
-            _______, ARR_F_JS, AG_LPRN, AG_RPRN,  EN_LBRC, EN_RBRC, CT_TAB,
-            _______, EN_ARR2,  EN_LCBR, EN_RCBR,  EN_LT,   EN_GT,   CS_TAB,
-            _______, EQ_JS,    NEQ_JS,  EN_GTEQ,  EN_LTEQ, EN_CLTG,
-            _______, CT_LEFT,  CT_DOWN, CT_UP,    CT_RGHT,
+            _______, _______, _______, _______, _______, _______, _______,
+            CT_PLUS, EN_MACR, CMB_LB2, CMB_RB2, EN_ARR2, EN_ARR1, CT_ENT,
+            CT_MINS, KC_TAB,  CMB_LB1, CMB_RB1, CMB_LB4, CMB_RB4, SH_TAB,
+            EN_FISH, CMB_LB3, CMB_RB3, EN_LTEQ, EN_GTEQ, EN_CLTG,
+            _______, _______, _______, _______, _______,
             _______, // RIGHT RED THUMB KEY
             _______, _______, _______ // RIGHT THUMB KEYS
             ),
@@ -479,6 +427,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, AU_TOG,  MU_TOG,  MU_MOD,
         RGB_PRT, // LEFT RED THUMB KEY
         PIC_0,   PIC_1,   PIC_2, // LEFT THUMB KEYS
+
         // RIGHT HALF
         _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______,
@@ -534,222 +483,115 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 const ComboWithKeycode combos[] PROGMEM = {
-
-
-
-    //Russian additional keys
-    //Х+Ж = Э
-    CHORD(RU_H, /* <- */ RU_CMB_H),
-    CHORD(RU_ZH, /* <- */ RU_CMB_ZH),
-    CHORD(RU_E, /* <- */ RU_CMB_ZH, RU_CMB_H ),
-
-    CHORD(RU_S_H, /* <- */ RU_CMB_S_H),
-    CHORD(RU_S_ZH, /* <- */ RU_CMB_S_ZH),
-    CHORD(RU_S_E, /* <- */ RU_CMB_S_H, RU_CMB_S_ZH),
-
-    //Б + Ь = Ъ
-    CHORD(RU_B, /* <- */ RU_CMB_B),
-    CHORD(RU_SF, /* <- */ RU_CMB_SF),
-    CHORD(RU_HD, /* <- */ RU_CMB_B, RU_CMB_SF),
-
-    CHORD(RU_S_B, /* <- */ RU_CMB_S_B),
-    CHORD(RU_S_SF, /* <- */ RU_CMB_S_SF),
-    CHORD(RU_S_HD, /* <- */ RU_CMB_S_B, RU_CMB_S_SF),
-
-
-
-    //temporary arrows
-    CHORD(TT_RED, BR_R5),
-    CHORD(KC_LEFT, /* <- */ BR_R4),
-    CHORD(KC_DOWN, /* <- */ BR_R3),
-    CHORD(KC_UP, /* <- */ BR_R2),
-    CHORD(KC_RIGHT, /* <- */ BR_R1),
-
-
+    // Left Index
+    CHORD(CT_C,    /* <- */ CMB_CTC),
+    CHORD(CT_V,    /* <- */ CMB_CTV),
+    CHORD(CT_X,    /* <- */ CMB_CTC, CMB_CTV),
 
     // Left Thumb
-    IMMEDIATE_CHORD(SFT_N, SFT_N,     /* <-! */ TC_L1 ),
-    CHORD(KC_BSPC, /* <- */ TC_L2), //backspace
-    CHORD(KC_ENT, /* <- */ TC_L3), //enter
-    CHORD(KC_LGUI, /* <- */ TC_LU), //CMD
-    CHORD(LGUI(KC_BSPC), /* <- */ TC_L2, TC_LU), // cmd+ backspace
-    CHORD(LALT(KC_BSPC), /* <- */ TC_L2, TC_L3), // alt + backspace
-    CHORD(MU_SCR, /* <- */ TC_L2, TC_L3, TC_LU), //screenshot
-    CHORD(CT_A,    /* <- */ TC_L1, TC_LU), // cmd + A
+    IMMEDIATE_CHORD(SFT_N, SFT_N,     /* <-! */ CMB_SFT),
+    CHORD(KC_BSPC, /* <- */ CMB_BSP),
+    CHORD(KC_ENT,  /* <- */ CMB_ENT),
+    IMMEDIATE_CHORD(CTRL_EN, CTRL_EN, /* <-! */ CMB_CTL),
+    CHORD(CT_A,    /* <- */ CMB_SFT, CMB_CTL),
+    IMMEDIATE_CHORD(TT_GRAY, TT_UNDO, /* <-! */ CMB_SFT, CMB_BSP),
+    CHORD(KC_DEL,  /* <- */ CMB_BSP, CMB_CTL),
+    CHORD(CT_BSPC, /* <- */ CMB_BSP, CMB_ENT),
+    CHORD(CTSH_EN, /* <- */ CMB_SFT, CMB_BSP, CMB_CTL),
+    CHORD(MU_SCR,  /* <- */ CMB_BSP, CMB_ENT, CMB_CTL),
 
-    //  // Right Thumb
-    CHORD(MU_LANG, /* <- */ TC_R3), //language shift
-    CHORD(LA_SYNC, /* <- */ TC_R3, TC_R2), // language sync
-    CHORD(KC_SPC,  /* <- */ TC_R1), // space
-    CHORD(KC_LCTL, TC_RU), // ctrl
-    CHORD(AG_DOT, TC_R2), // dot
+    // Left Left Thumb
+    IMMEDIATE_CHORD(TT_VIOL, TT_UNDO, /* <-! */ CMB_LYV),
+    IMMEDIATE_CHORD(TT_RED,  TT_UNDO, /* <-! */ CMB_RED),
+    IMMEDIATE_CHORD(TT_GREN, TT_UNDO, /* <-! */ CMB_LYG),
+    IMMEDIATE_CHORD(TT_RED,  TT_UNDO, /* <-! */ CMB_LYV, CMB_LYG),
+    IMMEDIATE_CHORD(TT_CYAN, TT_UNDO, /* <-! */ CMB_LYV, CMB_RED),
 
+    // Right Thumb
+    CHORD(MU_LANG, /* <- */ CMB_LAN),
+    CHORD(AG_DOT,  /* <- */ CMB_DOT),
+    CHORD(KC_SPC,  /* <- */ CMB_SPC),
+    CHORD(ALT_EN,  /* <- */ CMB_ALT),
+    CHORD(AG_SDOT, /* <- */ CMB_DOT, CMB_SPC),
+    CHORD(LA_SYNC, /* <- */ CMB_LAN, CMB_DOT),
+    CHORD(CTAL_EN, /* <- */ CMB_SPC, CMB_ALT),
+    CHORD(SHAL_EN, /* <- */ CMB_DOT, CMB_ALT),
+    CHORD(WIN_EN,  /* <- */ CMB_SPC, CMB_DOT, CMB_ALT),
+    CHORD(MU_WNL,  /* <- */ CMB_LAN, CMB_DOT, CMB_ALT),
 
+    // -------------------------------------------------------------------------
+    // Shifted index keys
 
-    //  // Left Index
+    // Left Index
+    CHORD(CT_A_C,  /* <- */ CMB_CAC),
+    CHORD(CT_A_V,  /* <- */ CMB_CAV),
+    CHORD(CT_A_X,  /* <- */ CMB_CAC, CMB_CAV),
 
-    CHORD(CT_T, MC_L1), // key1:cmd+T
-    CHORD(CS_T, MC_LS1), // key1+ shift: cmd+shift+T
-    CHORD(CT_C,    /* <- */ MC_L2), // key 2: copy
-    CHORD(CT_V,    /* <- */ MC_L3), //key 3: paste
-    CHORD(CT_X,    /* <- */ MC_L2, MC_L3), //key2 + key3: cut
-    CHORD(CT_A_C,  /* <- */ MC_LS2),// key 2 + shift: ctrl+A + copy
-    CHORD(CT_A_V,  /* <- */ MC_LS3), // key 3 + shift: ctrl+A + copy,
-    CHORD(CT_A_X,  /* <- */ MC_LS2, MC_LS3),// key 3 +key2 + shift: ctrl+A + cut
+    // -------------------------------------------------------------------------
+    // Russian combos on letters
+    CHORD(RU_R,    /* <- */ CMS_R),
+    CHORD(RU_SH,   /* <- */ CMS_SH),
+    CHORD(RU_HD,   /* <- */ CMS_R, CMS_SH),
+    CHORD(RU_S_R,  /* <- */ CMS_S_R),
+    CHORD(RU_S_SH, /* <- */ CMS_SSH),
+    CHORD(RU_S_HD, /* <- */ CMS_S_R, CMS_SSH),
 
+    // -------------------------------------------------------------------------
+    // Number row
 
-    //Right Index
-    CHORD(CT_W, MC_R1), //cmd+W
-    CHORD(CS_W, MC_RS1), //cmd+shift+W
-    CHORD(CT_S, MC_R2), //cmd + S
-    CHORD(CO_L, MC_RS2), // cmd + Alt + L
-    CHORD(AG_COMM, MC_R3), // ,
+    // Left hand
+    CHORD(AG_PLUS, /* <- */ CMB_PLS),
+    CHORD(AG_SCLN, /* <- */ CMB_SCL),
+    CHORD(EN_GRV,  /* <- */ CMB_GRV),
+    CHORD(AG_EXCL, /* <- */ CMB_EXL),
+    CHORD(AG_ASTR, /* <- */ CMB_ASR),
+    CHORD(EN_TILD, /* <- */ CMB_PLS, CMB_EXL),
+    CHORD(RU_NUME, /* <- */ CMB_PLS, CMB_ASR),
+    CHORD(EN_QUOT, /* <- */ CMB_GRV, CMB_EXL),
+    CHORD(AG_DQUO, /* <- */ CMB_SCL, CMB_GRV),
+    CHORD(AG_PERC, /* <- */ CMB_SCL, CMB_EXL),
+    CHORD(EN2QUOT, /* <- */ CMB_SCL, CMB_ASR),
+    CHORD(AG2DQUO, /* <- */ CMB_SCL, CMB_GRV, CMB_EXL),
 
+    // Right hand
+    CHORD(AG_SLSH, /* <- */ CMB_SLS),
+    CHORD(AG_QUES, /* <- */ CMB_QUE),
+    CHORD(AG_CMSP, /* <- */ CMB_CMM),
+    CHORD(AG_COLN, /* <- */ CMB_CLN),
+    CHORD(AG_EQL,  /* <- */ CMB_EQL),
+    CHORD(EN_DLR,  /* <- */ CMB_SLS, CMB_CLN),
+    CHORD(EN_HASH, /* <- */ CMB_SLS, CMB_EQL),
+    CHORD(EN_PIPE, /* <- */ CMB_CMM, CMB_CLN),
+    CHORD(EN_AMPR, /* <- */ CMB_QUE, CMB_CMM),
+    CHORD(AG_BSLS, /* <- */ CMB_QUE, CMB_CLN),
+    CHORD(EN2PIPE, /* <- */ CMB_QUE, CMB_EQL),
+    CHORD(EN2AMPR, /* <- */ CMB_QUE, CMB_CMM, CMB_CLN),
 
-    //  // Right Thumb
-    CHORD(MU_LANG, /* <- */ TC_R3),
-    CHORD(LA_SYNC, /* <- */ TC_R3, TC_R2),
-    CHORD(KC_SPC,  /* <- */ TC_R1),
+    // -------------------------------------------------------------------------
+    // Brackets on red layer
+    CHORD(AG_LPRN, /* <- */ CMB_LB1),
+    CHORD(AG_RPRN, /* <- */ CMB_RB1),
+    CHORD(EN_LBRC, /* <- */ CMB_LB2),
+    CHORD(EN_RBRC, /* <- */ CMB_RB2),
+    CHORD(EN_LCBR, /* <- */ CMB_LB3),
+    CHORD(EN_RCBR, /* <- */ CMB_RB3),
+    CHORD(EN_LT,   /* <- */ CMB_LB4),
+    CHORD(EN_GT,   /* <- */ CMB_RB4),
+    CHORD(AG_2B1,  /* <- */ CMB_LB1, CMB_RB1),
+    CHORD(EN_2B2,  /* <- */ CMB_LB2, CMB_RB2),
+    CHORD(EN_2B3,  /* <- */ CMB_LB3, CMB_RB3),
+    CHORD(EN_2B4,  /* <- */ CMB_LB4, CMB_RB4),
 
+    // -------------------------------------------------------------------------
+    // Brackets on XCompose layer
 
-//    CHORD(CT_T, MC_L1), //cmd+T
-    //Left top row
-    CHORD(KC_ESC, UR_L1), // Escape
-    CHORD(AG_EXCL, UR_L2), // !
-    CHORD(EN_AT, UR_L3), // @
-    CHORD(EN_AMPR, UR_L4), // &
-    CHORD(EN_PIPE, UR_L5), // |
-    CHORD(EN_PERC, UR_L6), // %
+    CHORD(XC_LTRE, /* <- */ CMB_LTR),
+    CHORD(XC_RTRE, /* <- */ CMB_RTR),
+    CHORD(XC_BTRE, /* <- */ CMB_LTR, CMB_RTR),
 
-    // Right top row
-    CHORD(EN_CIRC, UR_R6), // ^
-    CHORD(AG_QUES, UR_R5), // ?
-    CHORD(EN_ASTR, UR_R4), // *
-    CHORD(EN_QUOT, UR_R3), // '
-    CHORD(AG_DQUO, /* <- */ UR_R2),// "
-    CHORD(EN_GRV, UR_R3, UR_R2), // ` is " + '
-
-
-    // total combos upper = 57
-    //right outer column
-    CHORD(AG_SCLN, EC_R1), // ;
-    CHORD(AG_COLN, EC_S_R1), // :
-    CHORD(AG_MINS, EC_R2), // -
-    CHORD(EN_TILD, EC_S_R2), // ~
-    CHORD(EN_SLSH, EC_R3), // /
-    CHORD(EN_BSLS, EC_S_R3), // backslash
-
-    //left outer column
-    CHORD(KC_TAB, EC_L1), // tab
-    CHORD(AG_UNDS, EC_L2), // _
-    CHORD(AG_PLUS, EC_S_L2), // +
-    CHORD(AG_EQL, EC_L2, EC_L3), // =
-    CHORD(EN_HASH, EC_L3), // #
-    CHORD(EN_DLR, EC_S_L3), // $
-
-
-
-
-
-
-
-    //  CHORD(KC_ENT,  /* <- */ CMB_ENT),
-    //  IMMEDIATE_CHORD(CTRL_EN, CTRL_EN, /* <-! */ CMB_CTL),
-    //  IMMEDIATE_CHORD(TT_GRAY, TT_UNDO, /* <-! */ CMB_SFT, CMB_BSP),
-    //  CHORD(KC_DEL,  /* <- */ CMB_BSP, CMB_CTL),
-    //  CHORD(CT_BSPC, /* <- */ CMB_BSP, CMB_ENT),
-    //  CHORD(CTSH_EN, /* <- */ CMB_SFT, CMB_BSP, CMB_CTL),
-    //  CHORD(MU_SCR,  /* <- */ CMB_BSP, CMB_ENT, CMB_CTL),
-    //
-    //  // Left Left Thumb
-    //  IMMEDIATE_CHORD(TT_VIOL, TT_UNDO, /* <-! */ CMB_LYV),
-    //  IMMEDIATE_CHORD(TT_RED,  TT_UNDO, /* <-! */ CMB_RED),
-    //  IMMEDIATE_CHORD(TT_GREN, TT_UNDO, /* <-! */ CMB_LYG),
-    //  IMMEDIATE_CHORD(TT_RED,  TT_UNDO, /* <-! */ CMB_LYV, CMB_LYG),
-    //  IMMEDIATE_CHORD(TT_CYAN, TT_UNDO, /* <-! */ CMB_LYV, CMB_RED),
-    //
-
-    //  CHORD(AG_DOT,  /* <- */ CMB_DOT),
-    //  CHORD(ALT_EN,  /* <- */ CMB_ALT),
-    //  CHORD(AG_SDOT, /* <- */ CMB_DOT, CMB_SPC),
-    //  CHORD(CTAL_EN, /* <- */ CMB_SPC, CMB_ALT),
-    //  CHORD(SHAL_EN, /* <- */ CMB_DOT, CMB_ALT),
-    //  CHORD(WIN_EN,  /* <- */ CMB_SPC, CMB_DOT, CMB_ALT),
-    //  CHORD(MU_WNL,  /* <- */ CMB_LAN, CMB_DOT, CMB_ALT),
-    //
-    //  // -------------------------------------------------------------------------
-    //  // Shifted index keys
-    //
-    //  // Left Index
-    //  CHORD(CT_A_C,  /* <- */ CMB_CAC),
-    //  CHORD(CT_A_V,  /* <- */ CMB_CAV),
-    //  CHORD(CT_A_X,  /* <- */ CMB_CAC, CMB_CAV),
-    //
-    //  // -------------------------------------------------------------------------
-    //  // Russian combos on letters
-    //  CHORD(RU_R,    /* <- */ CMS_R),
-    //  CHORD(RU_SH,   /* <- */ CMS_SH),
-    //  CHORD(RU_HD,   /* <- */ CMS_R, CMS_SH),
-    //  CHORD(RU_S_R,  /* <- */ CMS_S_R),
-    //  CHORD(RU_S_SH, /* <- */ CMS_SSH),
-    //  CHORD(RU_S_HD, /* <- */ CMS_S_R, CMS_SSH),
-    //
-    //  // -------------------------------------------------------------------------
-    //  // Number row
-    //
-    //  // Left hand
-    //  CHORD(AG_PLUS, /* <- */ CMB_PLS),
-    //  CHORD(AG_SCLN, /* <- */ CMB_SCL),
-    //  CHORD(EN_GRV,  /* <- */ CMB_GRV),
-    //  CHORD(AG_EXCL, /* <- */ CMB_EXL),
-    //  CHORD(AG_ASTR, /* <- */ CMB_ASR),
-    //  CHORD(EN_TILD, /* <- */ CMB_PLS, CMB_EXL),
-    //  CHORD(RU_NUME, /* <- */ CMB_PLS, CMB_ASR),
-    //  CHORD(EN_QUOT, /* <- */ CMB_GRV, CMB_EXL),
-    //  CHORD(AG_DQUO, /* <- */ CMB_SCL, CMB_GRV),
-    //  CHORD(AG_PERC, /* <- */ CMB_SCL, CMB_EXL),
-    //  CHORD(EN2QUOT, /* <- */ CMB_SCL, CMB_ASR),
-    //  CHORD(AG2DQUO, /* <- */ CMB_SCL, CMB_GRV, CMB_EXL),
-    //
-    //  // Right hand
-    //  CHORD(AG_SLSH, /* <- */ CMB_SLS),
-    //  CHORD(AG_QUES, /* <- */ CMB_QUE),
-    //  CHORD(AG_CMSP, /* <- */ CMB_CMM),
-    //  CHORD(AG_COLN, /* <- */ CMB_CLN),
-    //  CHORD(AG_EQL,  /* <- */ CMB_EQL),
-    //  CHORD(EN_DLR,  /* <- */ CMB_SLS, CMB_CLN),
-    //  CHORD(EN_HASH, /* <- */ CMB_SLS, CMB_EQL),
-    //  CHORD(EN_PIPE, /* <- */ CMB_CMM, CMB_CLN),
-    //  CHORD(EN_AMPR, /* <- */ CMB_QUE, CMB_CMM),
-    //  CHORD(AG_BSLS, /* <- */ CMB_QUE, CMB_CLN),
-    //  CHORD(EN2PIPE, /* <- */ CMB_QUE, CMB_EQL),
-    //  CHORD(EN2AMPR, /* <- */ CMB_QUE, CMB_CMM, CMB_CLN),
-    //
-    //  // -------------------------------------------------------------------------
-    //  // Brackets on red layer
-    //  CHORD(AG_LPRN, /* <- */ CMB_LB1),
-    //  CHORD(AG_RPRN, /* <- */ CMB_RB1),
-    //  CHORD(EN_LBRC, /* <- */ CMB_LB2),
-    //  CHORD(EN_RBRC, /* <- */ CMB_RB2),
-    //  CHORD(EN_LCBR, /* <- */ CMB_LB3),
-    //  CHORD(EN_RCBR, /* <- */ CMB_RB3),
-    //  CHORD(EN_LT,   /* <- */ CMB_LB4),
-    //  CHORD(EN_GT,   /* <- */ CMB_RB4),
-    //  CHORD(AG_2B1,  /* <- */ CMB_LB1, CMB_RB1),
-    //  CHORD(EN_2B2,  /* <- */ CMB_LB2, CMB_RB2),
-    //  CHORD(EN_2B3,  /* <- */ CMB_LB3, CMB_RB3),
-    //  CHORD(EN_2B4,  /* <- */ CMB_LB4, CMB_RB4),
-    //
-    //  // -------------------------------------------------------------------------
-    //  // Brackets on XCompose layer
-    //
-    //  CHORD(XC_LTRE, /* <- */ CMB_LTR),
-    //  CHORD(XC_RTRE, /* <- */ CMB_RTR),
-    //  CHORD(XC_BTRE, /* <- */ CMB_LTR, CMB_RTR),
-    //
-    //  CHORD(XC_LCRN, /* <- */ CMB_LCR),
-    //  CHORD(XC_RCRN, /* <- */ CMB_RCR),
-    //  CHORD(XC_BCRN, /* <- */ CMB_LCR, CMB_RCR),
+    CHORD(XC_LCRN, /* <- */ CMB_LCR),
+    CHORD(XC_RCRN, /* <- */ CMB_RCR),
+    CHORD(XC_BCRN, /* <- */ CMB_LCR, CMB_RCR),
 };
 const uint8_t combos_size = sizeof(combos)/sizeof(ComboWithKeycode);
 
