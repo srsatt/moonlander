@@ -641,6 +641,7 @@ const ComboWithKeycode combos[] PROGMEM = {
 
     //left outer column
     CHORD(AG_UNDS, EC_L1), // _
+    CHORD(AG_UNDS, EC_S_L1), // _
     CHORD(KC_TAB, EC_L2), // tab
     CHORD(AG_PLUS, EC_S_L2), // +
     CHORD(AG_EQL, EC_L2, EC_L3), // =
