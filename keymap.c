@@ -567,6 +567,7 @@ const ComboWithKeycode combos[] PROGMEM = {
     //bottom row left
     CHORD(TT_GREN, BR_L5),
     CHORD(TT_YELW, BR_L4),
+    CHORD(KC_LALT, BR_L3),
 
 
 
