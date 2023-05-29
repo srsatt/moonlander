@@ -14,6 +14,7 @@ enum custom_hotkeys_keycodes {
   CT_A_C,
   CT_A_V,
   CT_A_X,
+  CT_C_F_V,//copy and search selected text
   AR_L5,
   CS_T,
   CS_W,
@@ -51,6 +52,7 @@ enum custom_hotkeys_keycodes {
   CT_RGHT,
   CT_BSPC,
   // for macos: ctrl -> cmd
+  CS_C,
   CT_ENT,
   CT_T,
   CT_W,
@@ -145,6 +147,12 @@ bool process_my_hotkeys(uint16_t keycode, keyrecord_t *record) {
         WITH(CTRL_OR_COMMAND, { PRESS(KC_A); PRESS(KC_C); });
       }
       return false;
+    case CT_C_F_V:
+      if (record->event.pressed) {
+        shift_activate(0);
+        WITH(CTRL_OR_COMMAND, { PRESS(KC_C); PRESS(KC_F); PRESS(KC_V); });
+      }
+      return false;
     case CT_A_V:
       if (record->event.pressed) {
         shift_activate(0);
@@ -169,6 +177,12 @@ bool process_my_hotkeys(uint16_t keycode, keyrecord_t *record) {
     case CS_T: {
       if (record->event.pressed) {
         WITH(CTRL_OR_COMMAND, { WITH(SHIFT, { PRESS(KC_T); }); });
+      }
+      return false;
+    }
+    case CS_C: {
+      if (record->event.pressed) {
+        WITH(CTRL_OR_COMMAND, { WITH(SHIFT, { PRESS(KC_C); }); });
       }
       return false;
     }

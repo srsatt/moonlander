@@ -388,10 +388,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //---------------------------------------------------------------------------
     [L_GREN] = MY_layout(
         // LEFT HALF
-        TG_GREN, _______, _______, _______, _______,  _______,  _______,
+        TG_GREN, WN_C_1,  WN_C_2,  WN_C_3,  WN_C_4,  WN_C_5,  WN_C_6,
         KC_MUTE, KC_F5,   CS_T,    CT_T,    CT_W,     F6_CT_C,  _______,
-        KC_VOLU, KC_MPRV, KC_MNXT, CT_PGUP, CT_PGDN,  KC_MPLY,  _______,
-        KC_VOLD, CT_F5,   CS_P,    CT_1,    CT_2,     AL_PSCR,
+        KC_VOLU, KC_MPRV, KC_MNXT, CT_PGUP, CT_C_F_V,  KC_MPLY,  CTL_C,
+        KC_VOLD, KC_MPRV, KC_MNXT,    CT_1,    CT_2,     CS_C,
         _______, _______, _______, _______, _______,
         _______, // LEFT RED THUMB KEY
         _______, _______, _______, // LEFT THUMB KEYS
@@ -557,13 +557,16 @@ const ComboWithKeycode combos[] PROGMEM = {
     CHORD(RU_S_HD, /* <- */ RU_CMB_S_B, RU_CMB_S_SF),
 
 
-
     //temporary arrows
     CHORD(TT_RED, BR_R5),
     CHORD(KC_LEFT, /* <- */ BR_R4),
     CHORD(KC_DOWN, /* <- */ BR_R3),
     CHORD(KC_UP, /* <- */ BR_R2),
-    CHORD(KC_RIGHT, /* <- */ BR_R1),
+    CHORD(KC_RIGHT, /* <- n*/ BR_R1),
+
+    //bottom row left
+    CHORD(TT_GREN, BR_L5),
+    CHORD(TT_YELW, BR_L4),
 
 
 
@@ -632,7 +635,7 @@ const ComboWithKeycode combos[] PROGMEM = {
     CHORD(EN_GRV, UR_R3, UR_R2), // ` is " + '
 
 
-    // total combos upper = 57
+    // total combos upper = 62
     //right outer column
     CHORD(AG_MINS, EC_R1), // -
     CHORD(EN_TILD, EC_S_R1), // ~
