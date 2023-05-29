@@ -379,7 +379,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             KC_F7,   KC_F8,    KC_F9,   KC_F10,   KC_F11,  KC_F12,  _______,
             _______, ARR_F_JS, AG_LPRN, AG_RPRN,  EN_LBRC, EN_RBRC, CT_TAB,
             _______, EN_ARR2,  EN_LCBR, EN_RCBR,  EN_LT,   EN_GT,   CS_TAB,
-            _______, EQ_JS,    NEQ_JS,  EN_GTEQ,  EN_LTEQ, EN_CLTG,
+            AG_EQL,  EQ_JS,    NEQ_JS,  EN_GTEQ,  EN_LTEQ, EN_CLTG,
             _______, CT_LEFT,  CT_DOWN, CT_UP,    CT_RGHT,
             _______, // RIGHT RED THUMB KEY
             _______, _______, _______ // RIGHT THUMB KEYS
@@ -403,7 +403,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, KC_F9,   KC_F8,   KC_F7,   KC_F12,  _______,
         _______, _______, _______, _______, _______,
         _______, // RIGHT RED THUMB KEY
-        _______, _______, _______ // RIGHT THUMB KEYS
+        _______, _______, _______ // RIGHT THUbMB KEYS
         ),
 
     //---------------------------------------------------------------------------
@@ -583,6 +583,7 @@ const ComboWithKeycode combos[] PROGMEM = {
     CHORD(KC_SPC,  /* <- */ TC_R1), // space
     CHORD(KC_LCTL, TC_RU), // ctrl
     CHORD(AG_DOT, TC_R2), // dot
+    CHORD(AG_SDOT, /* <- */ TC_R2, TC_R1), //dot+ space + next shift
 
 
 
@@ -603,7 +604,8 @@ const ComboWithKeycode combos[] PROGMEM = {
     CHORD(CS_W, MC_RS1), //cmd+shift+W
     CHORD(CT_S, MC_R2), //cmd + S
     CHORD(CO_L, MC_RS2), // cmd + Alt + L
-    CHORD(AG_COMM, MC_R3), // ,
+    CHORD(AG_CMSP, MC_R3), // ,+ space
+    CHORD(AG_COMM, MC_RS2, MC_R3), // ,
 
 
     //  // Right Thumb
