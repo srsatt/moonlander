@@ -9,3 +9,4 @@ RGB_MATRIX_ENABLE = yes
 CONSOLE_ENABLE = yes
 POINTING_DEVICE_ENABLE = no
 DYNAMIC_MACRO_ENABLE = no
+C_DEFS += -Wno-error=implicit-function-declaration

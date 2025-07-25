@@ -324,8 +324,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
         /* Right hand */
         EN_Y,    EN_U,    EN_I,    EN_O,    EN_P,
-        EN_H,    EN_J,    EN_K,    EN_L,    EN_S,
-        EN_N,    EN_M,    EN_W,    EN_V,    EN_Z,
+        EN_H,    EN_J,    EN_K,    EN_L,    EN_A_UMLAUT,  
+        EN_N,    EN_M,    EN_U_UMLAUT,    EN_O_UMLAUT,    EN_ESZETT,
 
         /* ---------------------------- Shift layer ---------------------------- */
         /* Left hand */
@@ -335,8 +335,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
         /* Right hand */
         EN_S_Y,    EN_S_U,    EN_S_I,    EN_S_O,    EN_S_P,
-        EN_S_H,    EN_S_J,    EN_S_K,    EN_S_L,    EN_S_S,
-        EN_S_N,    EN_S_M,    EN_S_W,    EN_S_V,    EN_S_Z
+        EN_S_H,    EN_S_J,    EN_S_K,    EN_S_L,    EN_S_A_UMLAUT,
+        EN_S_N,    EN_S_M,    EN_S_U_UMLAUT,    EN_S_O_UMLAUT,    EN_S_ESZETT
         )
 
     //---------------------------------------------------------------------------
@@ -532,12 +532,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______ // RIGHT THUMB KEYS
         ),
 };
-
 const ComboWithKeycode combos[] PROGMEM = {
 
-
-
-    //Russian additional keys
     //Х+Ж = Э
     CHORD(RU_H, /* <- */ RU_CMB_H),
     CHORD(RU_ZH, /* <- */ RU_CMB_ZH),
@@ -565,10 +561,11 @@ const ComboWithKeycode combos[] PROGMEM = {
     CHORD(KC_RIGHT, /* <- n*/ BR_R1),
 
     //bottom row left
-    CHORD(TT_GREN, BR_L5),
-    CHORD(TT_YELW, BR_L4),
+    CHORD(LALT(KC_SPC), BR_L1), // Spotlight (Option+Space)
+    CHORD(LGUI(LALT(KC_G)), BR_L2), // ChatGPT  
     CHORD(KC_LALT, BR_L3),
-
+    CHORD(TT_YELW, BR_L4),
+    CHORD(TT_GREN, BR_L5),
 
 
     // Left Thumb
